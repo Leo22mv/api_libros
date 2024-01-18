@@ -9,7 +9,17 @@ const libroSchema = Joi.object({
 });
 
 // Obtener todos los libros
+
 router.get('/', (req, res, next) => {
+    try {
+        res.json(libros);
+    } catch (err) {
+        next(err);
+    }
+});
+
+// Obtener un libro por ID
+router.get('/:id', (req, res, next) => {
     try {
         const id = req.params.id;
         const libro = libros.find((l) => l.id === id);
